@@ -93,5 +93,5 @@ write.table(required_data_set_with_activity_label, "./tidy.txt", row.names=FALSE
 #each variable for each activity and each subject.
 
 
-
+#See https://class.coursera.org/getdata-016/forum/thread?thread_id=161 for some valid test data.
 
