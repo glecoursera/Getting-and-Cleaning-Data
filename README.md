@@ -22,6 +22,8 @@ The original columns were renamed to more readable names.  These column names ar
 8. 'X', 'Y' or 'Z' in the label indicate the 3-axial signals in the specified direction.
 
 ### New Column Labels
+- activity_id
+- subject
 - body_acc_mean_X_time
 - body_acc_mean_Y_time
 - body_acc_mean_Z_time
@@ -88,3 +90,4 @@ The original columns were renamed to more readable names.  These column names ar
 - body_gyro_mag_std_freq
 - body_gyro_jerk_mag_mean_freq
 - body_gyro_jerk_mag_std_freq
+- activity
