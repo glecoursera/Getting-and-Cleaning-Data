@@ -126,3 +126,5 @@ dcasted <- dcast(melted,  subject+activity_label ~ variable, mean)
 melted2 <- melt(dcasted, id=c( "subject", "activity_label"), measure.vars=to_variables)
 
 ordered <- melted2[order(melted2$subject, melted2$activity_label),]
+
+#need to write output to file.
