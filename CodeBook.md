@@ -13,12 +13,12 @@ The subject fields were unmodified and indicated which of the 30 subjects ( iden
 
 ###activity
 The activity was transformed from an id (1-6) to the text values of 
-1. WALKING
-2. WALKING_UPSTAIRS
-3. WALKING_DOWNSTAIRS
-4. SITTING
-5. STANDING
-6. LAYING
+- WALKING (1)
+- WALKING_UPSTAIRS (2)
+- WALKING_DOWNSTAIRS (3)
+- SITTING (4)
+- STANDING (5)
+- LAYING (6)
 
 ###variable
 The variable field consists of 66 distinct values defined as:
