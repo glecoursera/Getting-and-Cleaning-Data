@@ -25,7 +25,7 @@ The original columns were renamed to more readable names.  These column names ar
 'X', 'Y' or 'Z' in the label indicate the 3-axial signals in the specified direction.
 
 New labels:
-"body_acc_mean_X_time", "body_acc_mean_Y_time", "body_acc_mean_Z_time",
+*body_acc_mean_X_time", "body_acc_mean_Y_time", "body_acc_mean_Z_time",
 "body_acc_std_X_time", "body_acc_std_Y_time", "body_acc_std_Z_time",
 "gravity_acc_mean_X_time", "gravity_acc_mean_Y_time","gravity_acc_mean_Z_time",
 "gravity_acc_std_X_time","gravity_acc_std_Y_time", "gravity_acc_std_Z_time",
