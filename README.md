@@ -1,7 +1,7 @@
 Getting-and-Cleaning-Data
 =========================
 
-The file `run_analysis.R` will take the data downloaded from [here] (https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip) and produce the tidy data set described here following the steps listed here.  The load the data into a data.frame use:
+The file `run_analysis.R` will take the data downloaded from [here] (https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip) and produce the tidy data set described [here] (https://github.com/glecoursera/Getting-and-Cleaning-Data/blob/master/README.md#resulting-tidy-data-consists-of-4-columns) following the steps listed here.  To load the data into a data.frame use:
 
 ```R
 load.data(tidy.txt)
