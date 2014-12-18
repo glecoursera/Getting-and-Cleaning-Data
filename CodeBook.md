@@ -19,7 +19,7 @@ The column names containing the text `-std()` and `-mean()` are determined using
 The data.frame from Step 2 is then reduced to only the columns deteremined in Step 3 .
 
 ####Step 5
-The function `assign_activity_label` loads the file `activity_labels.txt` and merges with the data.frame from Step 4.  This adds the column **activity_label** to the data.frame containing one of six values listed below in ['activity_level' description] (https://github.com/glecoursera/Getting-and-Cleaning-Data/blob/master/README.md#activity_label).
+The function `assign_activity_label` loads the file `activity_labels.txt` and merges with the data.frame from Step 4.  This adds the column **activity_label** to the data.frame containing one of six values listed below in ['activity_level' description] (https://github.com/glecoursera/Getting-and-Cleaning-Data/blob/master/CodeBook.md#activity_label).
 
 ####Step 6
 The readable column names are constructed from the 'replace_col_names' character vector and the text **activity**, **subject** and **activity_label**.  These updated column names are applied to the data.frame.
