@@ -1,7 +1,7 @@
 Getting-and-Cleaning-Data
 =========================
 
-The file run_analysis.R file will take the data downloaded from here https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip and produce the tidy data set described here following the steps listed here.  The load the data into a data.frame use:
+The file `run_analysis.R` will take the data downloaded from here https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip and produce the tidy data set described here following the steps listed here.  The load the data into a data.frame use:
 
 ```R
 load.data(tidy.txt)
@@ -9,15 +9,15 @@ load.data(tidy.txt)
 
 ####Step 1
 Each group of files are converted into a single data.frame using cbind.  This is completed for the following files:
-subject_test.txt, X_test.txt and Y_test.txt (test data)
-subject_train.txt, X_train.txt and Y_train.txt (training data)
-This is completed by the function bind_files.
+`subject_test.txt`, `X_test.txt` and `Y_test.txt` (test data)
+`subject_train.txt`, `X_train.txt` and `Y_train.txt` (training data)
+This is completed by the function `bind_files`.
 
 ####Step 2
 The 2 data.frames (test and train) are converted into a single data.frame using rbind.
 
 ####Step 3 
-The column names containing the text '-std()' and '-mean()' are determined using the function get_col_name which uses grep and regex to find the column names.  The column 'subject' and 'activity' are also included in the list.
+The column names containing the text `-std()` and `-mean()` are determined using the function `get_col_name` which uses grep and regex to find the column names.  The column **subject** and **activity** are also included in the list.
 
 ####Step 4
 The data.frame from Step 2 is then reduced to only the columns deteremined in Step 3 .
