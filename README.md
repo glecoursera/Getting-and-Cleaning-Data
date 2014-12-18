@@ -1,7 +1,11 @@
 Getting-and-Cleaning-Data
 =========================
 
-Getting and Cleaning Data project
+The file run_analysis.R file will take the data downloaded from here https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip and produce the tidy data set described here following the steps listed here.  The load the data into a data.frame use:
+
+```R
+load.data(tidy.txt)
+```
 
 ####Step 1
 Each group of files are converted into a single data.frame using cbind.  This is completed for the following files:
