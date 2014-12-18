@@ -3,12 +3,6 @@ Getting-and-Cleaning-Data
 
 Getting and Cleaning Data project
 
-
-Getting-and-Cleaning-Data
-=========================
-
-CodeBook for Getting and Cleaning Data Project
-
 ####Step 1
 Each group of files are converted into a single data.frame using cbind.  This is completed for the following files:
 subject_test.txt, X_test.txt and Y_test.txt (test data)
