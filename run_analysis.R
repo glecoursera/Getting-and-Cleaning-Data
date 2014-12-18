@@ -1,4 +1,6 @@
-#bind all relevent files (subject, x_data, y_data) into one data frame and assigns relevent column names.
+library(reshape2)
+
+#Binds all relevent files (subject, x_data, y_data) into one data frame and assigns relevent column names.
 bind_files <- function(subject_file, x_file, y_file) {
   subject_data <- read.table(paste("./UCI HAR Dataset/",subject_file, sep=""), col.names="subject")
   message("subject_data rows: ", dim(subject_data)[1], " subject_data columns: ", dim(subject_data)[2])
@@ -13,6 +15,8 @@ bind_files <- function(subject_file, x_file, y_file) {
   merged_data
 }
 
+#Gets all the features containing -mean() or -std() and converts them to R column names.  
+#Then adds the subject and activity columns to the beginning of the list.
 get_col_names <- function() {
   #get the columns lables based on the features.  Does not include any subject or activity columns.
   all_col_labels <- features[,2,  drop=FALSE]
@@ -27,7 +31,9 @@ get_col_names <- function() {
   required_col_names <- append(required_col_names, c("subject", "activity"), after=0)
   required_col_names
 }
- 
+
+#loads the activity labels and merges with the data (which contains only required columns) resulting
+#in a activity text label for each observation
 assign_activity_label <- function(required_data) {
   activity_labels <- read.table("./UCI HAR Dataset/activity_labels.txt", col.name=c("activity", "act_label"))  
   required_data_with_activity_label_added <- merge(required_data,activity_labels)
@@ -35,60 +41,34 @@ assign_activity_label <- function(required_data) {
   required_data_with_activity_label_added
 }
 
-#applying these column names after the merge, therefor the common original column of 'activity' has been reordered and placed first.
-renamed_col_names <-  c("activity_id", "subject",
-                        "body_acc_mean_X_time", "body_acc_mean_Y_time", "body_acc_mean_Z_time",
-                        "body_acc_std_X_time", "body_acc_std_Y_time", "body_acc_std_Z_time",
-                        "gravity_acc_mean_X_time", "gravity_acc_mean_Y_time","gravity_acc_mean_Z_time",
-                        "gravity_acc_std_X_time","gravity_acc_std_Y_time", "gravity_acc_std_Z_time",
-                        "body_acc_jerk_mean_X_time","body_acc_jerk_mean_Y_time","body_acc_jerk_mean_Z_time",
-                        "body_acc_jerk_std_X_time","body_acc_jerk_std_Y_time","body_acc_jerk_std_Z_time",
-                        "body_gyro_mean_X_time","body_gyro_mean_Y_time","body_gyro_mean_Z_time",
-                        "body_gyro_std_X_time","body_gyro_std_Y_time","body_gyro_std_Z_time",
-                        "body_acc_jerk_mean_X_time","body_acc_jerk_mean_Y_time","body_acc_jerk_mean_Z_time",
-                        "body_acc_jerk_std_X_time","body_acc_jerk_std_Y_time","body_acc_jerk_std_Z_time",
-                        "body_acc_mean_time","body_acc_std_time",
-                        "gravity_acc_mag_mean_time","gravity_acc_mag_std_time",
-                        "body_acc_jerk_mag_mean_time","body_acc_jerk_mag_std_time",
-                        "body_gyro_mag_mean_time","body_gyro_mag_std_time",
-                        "body_gyro_jerk_mag_mean_time", "body_gyro_jerk_mag_std_time",
-                        "body_acc_mean_X_freq","body_acc_mean_Y_freq","body_acc_mean_Z_freq",
-                        "body_acc_std_X_freq", "body_acc_std_Y_freq","body_acc_std_Z_freq",
-                        "body_acc_jerk_mean_X_freq","body_acc_jerk_mean_Y_freq","body_acc_jerk_mean_Z_freq",
-                        "body_acc_jerk_std_X_freq","body_acc_jerk_std_Y_freq","body_acc_jerk_std_Z_freq",
-                        "body_gyro_mean_X_freq","body_gyro_mean_Y_freq","body_gyro_mean_Z_freq",
-                        "body_gyro_std_X_freq","body_gyro_std_Y_freq","body_gyro_std_Z_freq",
-                        "body_acc_mag_mean_freq","body_acc_mag_std_freq",
-                        "body_acc_jerk_mag_mean_freq","body_acc_jerk_mag_std_freq",
-                        "body_gyro_mag_mean_freq","body_gyro_mag_std_freq",
-                        "body_gyro_jerk_mag_mean_freq", "body_gyro_jerk_mag_std_freq",
-                        "activity_label")
 
-to_variables <-  c("body_acc_mean_X_time", "body_acc_mean_Y_time", "body_acc_mean_Z_time",
-                        "body_acc_std_X_time", "body_acc_std_Y_time", "body_acc_std_Z_time",
-                        "gravity_acc_mean_X_time", "gravity_acc_mean_Y_time","gravity_acc_mean_Z_time",
-                        "gravity_acc_std_X_time","gravity_acc_std_Y_time", "gravity_acc_std_Z_time",
-                        "body_acc_jerk_mean_X_time","body_acc_jerk_mean_Y_time","body_acc_jerk_mean_Z_time",
-                        "body_acc_jerk_std_X_time","body_acc_jerk_std_Y_time","body_acc_jerk_std_Z_time",
-                        "body_gyro_mean_X_time","body_gyro_mean_Y_time","body_gyro_mean_Z_time",
-                        "body_gyro_std_X_time","body_gyro_std_Y_time","body_gyro_std_Z_time",
-                        "body_acc_jerk_mean_X_time","body_acc_jerk_mean_Y_time","body_acc_jerk_mean_Z_time",
-                        "body_acc_jerk_std_X_time","body_acc_jerk_std_Y_time","body_acc_jerk_std_Z_time",
-                        "body_acc_mean_time","body_acc_std_time",
-                        "gravity_acc_mag_mean_time","gravity_acc_mag_std_time",
-                        "body_acc_jerk_mag_mean_time","body_acc_jerk_mag_std_time",
-                        "body_gyro_mag_mean_time","body_gyro_mag_std_time",
-                        "body_gyro_jerk_mag_mean_time", "body_gyro_jerk_mag_std_time",
-                        "body_acc_mean_X_freq","body_acc_mean_Y_freq","body_acc_mean_Z_freq",
-                        "body_acc_std_X_freq", "body_acc_std_Y_freq","body_acc_std_Z_freq",
-                        "body_acc_jerk_mean_X_freq","body_acc_jerk_mean_Y_freq","body_acc_jerk_mean_Z_freq",
-                        "body_acc_jerk_std_X_freq","body_acc_jerk_std_Y_freq","body_acc_jerk_std_Z_freq",
-                        "body_gyro_mean_X_freq","body_gyro_mean_Y_freq","body_gyro_mean_Z_freq",
-                        "body_gyro_std_X_freq","body_gyro_std_Y_freq","body_gyro_std_Z_freq",
-                        "body_acc_mag_mean_freq","body_acc_mag_std_freq",
-                        "body_acc_jerk_mag_mean_freq","body_acc_jerk_mag_std_freq",
-                        "body_gyro_mag_mean_freq","body_gyro_mag_std_freq",
-                        "body_gyro_jerk_mag_mean_freq", "body_gyro_jerk_mag_std_freq")
+#new variable column names
+replace_col_names <- c("tBodyAcc.meanX", "tBodyAcc.meanY", "tBodyAcc.meanZ",
+                       "tBodyAcc.stdX", "tBodyAcc.stdY", "tBodyAcc.stdZ",
+                       "tGravityAcc.meanX", "tGravityAcc.meanY","tGravityAcc.meanZ",
+                       "tGravityStd.meanX", "tGravityStd.meanY","tGravityStd.meanZ",
+                       "tBodyAccJerk.meanX","tBodyAccJerk.meanY","tBodyAccJerk.meanZ",
+                       "tBodyAccJerk.stdX","tBodyAccJerk.stdY","tBodyAccJerk.stdZ",
+                       "tBodyGyro.meanX","tBodyGyro.meanY","tBodyGyro.meanZ",
+                       "tBodyGyro.stdX","tBodyGyro.stdY","tBodyGyro.stdZ",
+                       "tBodyAccJerk.meanX","tBodyAccJerk.meanY","tBodyAccJerk.meanZ",
+                       "tBodyAccJerk.stdX","tBodyAccJerk.stdY","tBodyAccJerk.stdZ",
+                       "tBodyAcc.mean","tBodyAcc.std",
+                       "tGravityAccMag.mean","tGravityAccMag.std",
+                       "tBodyAccJerkMag.mean","tBodyAccJerkMag.std",
+                       "tBodyGyroMag.mean","tBodyGyroMag.std",
+                       "tBodyGyroJerkMag.mean", "tBodyGyroJerkMag.std",
+                       "fBodyAcc.meanX","fBodyAcc.meanY","fBodyAcc.meanZ",
+                       "fBodyAcc.stdX","fBodyAcc.stdY","fBodyAcc.stfZ",
+                       "fBodyAccJerk.meanX","fBodyAccJerk.meanY","fBodyAccJerk.meanZ",
+                       "fBodyAccJerk.stdX","fBodyAccJerk.stdY","fBodyAccJerk.stdZ",
+                       "fBodyGyro.meanX","fBodyGyro.meanY","fBodyGyro.meanZ",
+                       "fBodyGyro.stdX","fBodyGyro.stdY","fBodyGyro.stdZ",
+                       "fBodyAccMag.mean","fBodyAccMag.std",
+                       "fBodyAccJerkMag.mean","fBodyAccJerkMag.std",
+                       "fBodyGyroMag.mean","fBodyGyroMag.std",
+                       "fBodyGyroJerkMag.mean", "fBodyGyroJerkMag.std")
+
 
 
 features <- read.table("./UCI HAR Dataset/features.txt", col.names=c("index", "label"))  
@@ -109,22 +89,22 @@ message("required_data_set: ", dim(required_data_set)[1], " required_data_set: "
 
 required_data_set_with_activity_label <- assign_activity_label(required_data_set)
 
+#build the complete column rename list using the replace_col_names 
+renamed_col_names <- append(replace_col_names, c("activity_id", "subject"), after=0)
+renamed_col_names <- append(renamed_col_names, "activity_label")
+
+#applying these column names after the merge, therefor the common original column of 'activity' has been reordered and placed first.
 colnames(required_data_set_with_activity_label) <- renamed_col_names
 
-#write.table(required_data_set_with_activity_label, "./tidy.txt", row.names=FALSE)
-
-#From the data set in step 4, creates a second, 
-#independent tidy data set with the average of 
-#each variable for each activity and each subject.
-
-
 #See https://class.coursera.org/getdata-016/forum/thread?thread_id=161 for some valid test data.
-melted <- melt(required_data_set_with_activity_label, id=c("subject", "activity_label" ), measure.vars=to_variables)
-
+#melt the data.frame to convert columns to variables
+melted <- melt(required_data_set_with_activity_label, id=c("subject", "activity_label" ), measure.vars=replace_col_names)
+#convert into a data.frame by subject+activity_label and calculation the mean for each combination.
 dcasted <- dcast(melted,  subject+activity_label ~ variable, mean)
+melted2 <- melt(dcasted, id=c( "subject", "activity_label"), measure.vars=replace_col_names)
 
-melted2 <- melt(dcasted, id=c( "subject", "activity_label"), measure.vars=to_variables)
-
+#order the data.frame first by subject, then activity_label.
 ordered <- melted2[order(melted2$subject, melted2$activity_label),]
 
-#need to write output to file.
+write.table(ordered, "./tidy.txt", row.names=FALSE)
+#add sample code for reading.
