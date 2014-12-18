@@ -23,21 +23,21 @@ The column names containing the text `-std()` and `-mean()` are determined using
 The data.frame from Step 2 is then reduced to only the columns deteremined in Step 3 .
 
 ####Step 5
-The function assign_activity_label loads the file 'activity_labels.txt' and merges with the data.frame from Step 4.  This adds the column 'activity_label' to the data.frame containing one of six values listed below in 'activity_level' description.
+The function `assign_activity_label` loads the file `activity_labels.txt` and merges with the data.frame from Step 4.  This adds the column **activity_label** to the data.frame containing one of six values listed below in ['activity_level' description] (https://github.com/glecoursera/Getting-and-Cleaning-Data/blob/master/README.md#activity_label).
 
 ####Step 6
-The readable column names are constructed from 'replace_col_names' character vector and the text 'activity', 'subject' and 'actvity_label'.  These updated column names are applied to the data.frame.
+The readable column names are constructed from the 'replace_col_names' character vector and the text **activity**, **subject** and **actvity_label**.  These updated column names are applied to the data.frame.
 
 ####Step 7
-The data.frame is melted (using the reshape2 package melt function) and converts the data.frame to use 'subject' and 'activity_label' as ids and the replace_col_names values are assigned as measure.vars.  dcast is used to apply the mean functon across subject and activity_label combinations against the variables.  melt is applied again to convert the data.frame to long form tidy data.
+The data.frame is melted (using the reshape2 package `melt` function) and converts the data.frame to use **subject** and **activity_label** as ids and the replace_col_names values are assigned as measure.vars.  `dcast` is used to apply the mean function across **subject** and **activity_label** combinations against the variables.  `melt` is applied again to convert the data.frame to long form tidy data.
 
 ####Step 8 
-The data.frame is ordered by 'subject' first, then 'activity_label'
+The data.frame is ordered by **subject** first, then **activity_label**.
 
 ####Step 9
-The final tidy data.frame is written to a file tidy.txt.
+The final tidy data.frame is written to a file `tidy.txt` in the current working directory.
 
-##Resulting tidy data consists of 4 columns
+##Resulting Tidy Data Consists of 4 Columns
 ###subject
 The subject fields were unmodified and indicated which of the 30 subjects ( identified by id 1-30) the observation applies.
 
