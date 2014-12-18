@@ -26,7 +26,7 @@ The data.frame from Step 2 is then reduced to only the columns deteremined in St
 The function `assign_activity_label` loads the file `activity_labels.txt` and merges with the data.frame from Step 4.  This adds the column **activity_label** to the data.frame containing one of six values listed below in ['activity_level' description] (https://github.com/glecoursera/Getting-and-Cleaning-Data/blob/master/README.md#activity_label).
 
 ####Step 6
-The readable column names are constructed from the 'replace_col_names' character vector and the text **activity**, **subject** and **actvity_label**.  These updated column names are applied to the data.frame.
+The readable column names are constructed from the 'replace_col_names' character vector and the text **activity**, **subject** and **activity_label**.  These updated column names are applied to the data.frame.
 
 ####Step 7
 The data.frame is melted (using the reshape2 package `melt` function) and converts the data.frame to use **subject** and **activity_label** as ids and the replace_col_names values are assigned as measure.vars.  `dcast` is used to apply the mean function across **subject** and **activity_label** combinations against the variables.  `melt` is applied again to convert the data.frame to long form tidy data.
