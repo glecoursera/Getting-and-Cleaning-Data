@@ -28,9 +28,12 @@ The readable column names are constructed from the 'replace_col_names' character
 The data.frame is melted (using the reshape2 package `melt` function) and converts the data.frame to use **subject** and **activity_label** as ids and the replace_col_names values are assigned as measure.vars.  `dcast` is used to apply the mean function across **subject** and **activity_label** combinations against the variables.  `melt` is applied again to convert the data.frame to long form tidy data.
 
 ####Step 8 
-The data.frame is ordered by **subject** first, then **activity_label**.
+NA values are removed from the data.frame using `complete_cases`.
 
 ####Step 9
+The data.frame is ordered by **subject** first, then **activity_label**.
+
+####Step 10
 The final tidy data.frame is written to a file `tidy.txt` in the current working directory.
 
 ##Resulting Tidy Data Consists of 4 Columns
