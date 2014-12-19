@@ -103,8 +103,8 @@ melted <- melt(required_data_set_with_activity_label, id=c("subject", "activity_
 dcasted <- dcast(melted,  subject+activity_label ~ variable, mean)
 melted2 <- melt(dcasted, id=c( "subject", "activity_label"), measure.vars=replace_col_names)
 
+complete_records <- melted2[complete.cases(melted2),]
 #order the data.frame first by subject, then activity_label.
-ordered <- melted2[order(melted2$subject, melted2$activity_label),]
+ordered <- complete_records[order(complete_records$subject, complete_records$activity_label),]
 
 write.table(ordered, "./tidy.txt", row.names=FALSE)
-#add sample code for reading.
